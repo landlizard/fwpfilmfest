@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fish Water People Film Festival Trivia</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      overflow: hidden;
+      background-color: #f0f8ff;
+      color: #333;
+    }
+    
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      box-sizing: border-box;
+      position: relative;
+      background: linear-gradient(120deg, #cee7ff, #f0f8ff);
+    }
+
+    .slide {
+      display: none;
+      max-width: 900px;
+      width: 90%;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 3rem;
+      position: relative;
+      transition: transform 0.5s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #0066cc;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #3385d6;
+      margin-bottom: 2rem;
+    }
+
+    .question {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #003366;
+      margin-bottom: 1.5rem;
+    }
+
+    .answer {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #009966;
+      margin-bottom: 1rem;
+    }
+
+    .note {
+      font-size: 1.3rem;
+      font-style: italic;
+      color: #666;
+    }
+
+    .difficulty {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 5px 10px;
+      border-radius: 15px;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      background-color: #004c99;
+    }
+
+    .progress {
+      position: fixed;
+      bottom: 10px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #0066cc;
+    }
+
+    .water-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('/api/placeholder/1000/600') center/cover;
+      opacity: 0.15;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="water-bg"></div>
+    <div class="logo">CalTrout</div>
+    
+    <!-- Slide 1: Welcome -->
+    <div class="slide active" id="slide-1">
+      <h1>Fish Water People Film Festival</h1>
+      <h2>California Trout Trivia Challenge</h2>
+      <p class="note" style="font-size: 1.5rem;">Test your knowledge about California's waters and wildlife</p>
+    </div>
+
+    <!-- Slide 2: Question -->
+    <div class="slide" id="slide-2">
+      <div class="difficulty">10-Year-Old Difficulty</div>
+      <p class="question">What is the name of the conservation group that works to protect wild fish in California?</p>
+    </div>
+
+    <!-- Slide 3: Answer -->
+    <div class="slide" id="slide-3">
+      <div class="difficulty">10-Year-Old Difficulty</div>
+      <p class="answer">California Trout</p>
+      <p class="note">Working to ensure resilient wild fish in healthy waters</p>
+    </div>
+
+    <!-- Slide 4: Question -->
+    <div class="slide" id="slide-4">
+      <div class="difficulty">Super High-Level Difficulty</div>
+      <p class="question">What is the difference between anadromous steelhead and resident rainbow trout?</p>
+    </div>
+
+    <!-- Slide 5: Answer -->
+    <div class="slide" id="slide-5">
+      <div class="difficulty">Super High-Level Difficulty</div>
+      <p class="answer">Anadromous steelhead migrate to sea, whereas resident rainbow trout spend their entire life in fresh water</p>
+      <p class="note">Same species, different life strategies</p>
+    </div>
+
+    <!-- Slide 6: Question -->
+    <div class="slide" id="slide-6">
+      <div class="difficulty">Average Difficulty</div>
+      <p class="question">In what year was California Trout founded?</p>
+    </div>
+
+    <!-- Slide 7: Answer -->
+    <div class="slide" id="slide-7">
+      <div class="difficulty">Average Difficulty</div>
+      <p class="answer">1971</p>
+      <p class="note">Over 50 years of conservation work in California</p>
+    </div>
+
+    <!-- Slide 8: Question -->
+    <div class="slide" id="slide-8">
+      <div class="difficulty">10-Year-Old Difficulty</div>
+      <p class="question">What type of fish is the California state fish?</p>
+    </div>
+
+    <!-- Slide 9: Answer -->
+    <div class="slide" id="slide-9">
+      <div class="difficulty">10-Year-Old Difficulty</div>
+      <p class="answer">California Golden Trout</p>
+      <p class="note">A beautiful native species found in high mountain streams</p>
+    </div>
+
+    <!-- Slide 10: Question -->
+    <div class="slide" id="slide-10">
+      <div class="difficulty">Super High-Level Difficulty</div>
+      <p class="question">What is the public trust doctrine?</p>
+    </div>
+
+    <!-- Slide 11: Answer -->
+    <div class="slide" id="slide-11">
+      <div class="difficulty">Super High-Level Difficulty</div>
+      <p class="answer">A principle that natural resources are held in trust for the benefit of all people and the state has an obligation to protect them</p>
+      <p class="note">The legal foundation for many environmental protections</p>
+    </div>
+
+    <!-- Slide 12: Question -->
+    <div class="slide" id="slide-12">
+      <div class="difficulty">Average Difficulty</div>
+      <p class="question">What is the main threat affecting salmonid populations in California?</p>
+    </div>
+
+    <!-- Slide 13: Answer -->
+    <div class="slide" id="slide-13">
+      <div class="difficulty">Average Difficulty</div>
+      <p class="answer">Climate change</p>
+      <p class="note">Warming waters and changing precipitation patterns are threatening native fish</p>
+    </div>
+
+    <!-- Slide 14: Question -->
+    <div class="slide" id="slide-14">
+      <div class="difficulty">10-Year-Old Difficulty</div>
+      <p class="question">What is a "catch and release" approach to fishing?</p>
+    </div>
+
+    <!-- Slide 15: Answer -->
+    <div class="slide" id="slide-15">
+      <div class="difficulty">10-Year-Old Difficulty</div>
+      <p class="answer">Returning fish to the water after catching them</p>
+      <p class="note">A conservation practice that helps maintain fish populations</p>
+    </div>
+
+    <!-- Slide 16: Question -->
+    <div class="slide" id="slide-16">
+      <div class="difficulty">Super High-Level Difficulty</div>
+      <p class="question">What are the challenges in using hatchery fish for restoration efforts?</p>
+    </div>
+
+    <!-- Slide 17: Answer -->
+    <div class="slide" id="slide-17">
+      <div class="difficulty">Super High-Level Difficulty</div>
+      <p class="answer">Hatchery fish can have genetic and ecological impacts on wild populations</p>
+      <p class="note">Including straying, competition, and hybridization with wild fish</p>
+    </div>
+
+    <!-- Slide 18: Question -->
+    <div class="slide" id="slide-18">
+      <div class="difficulty">Average Difficulty</div>
+      <p class="question">What percentage of California salmonids could be extinct in the next 50 years if current trends continue?</p>
+    </div>
+
+    <!-- Slide 19: Answer -->
+    <div class="slide" id="slide-19">
+      <div class="difficulty">Average Difficulty</div>
+      <p class="answer">45%</p>
+      <p class="note">According to the State of the Salmonids report, nearly half of native salmonids face extinction</p>
+    </div>
+
+    <!-- Slide 20: Question -->
+    <div class="slide" id="slide-20">
+      <div class="difficulty">10-Year-Old Difficulty</div>
+      <p class="question">What is one thing that dams do that's bad for fish?</p>
+    </div>
+
+    <!-- Slide 21: Answer -->
+    <div class="slide" id="slide-21">
+      <div class="difficulty">10-Year-Old Difficulty</div>
+      <p class="answer">Block fish from swimming to their spawning grounds</p>
+      <p class="note">Creating barriers in migration routes essential for reproduction</p>
+    </div>
+
+    <!-- Slide 22: Question -->
+    <div class="slide" id="slide-22">
+      <div class="difficulty">Species-Specific High Difficulty</div>
+      <p class="question">What makes the Klamath Mountains Province summer steelhead particularly vulnerable?</p>
+    </div>
+
+    <!-- Slide 23: Answer -->
+    <div class="slide" id="slide-23">
+      <div class="difficulty">Species-Specific High Difficulty</div>
+      <p class="answer">Their reliance on cold water sources during the warmest summer months</p>
+      <p class="note">These cold water refuges are becoming increasingly rare due to climate change</p>
+    </div>
+
+    <!-- Slide 24: Question -->
+    <div class="slide" id="slide-24">
+      <div class="difficulty">Average Difficulty</div>
+      <p class="question">What are the three conservation initiatives that California Trout focuses on?</p>
+    </div>
+
+    <!-- Slide 25: Answer -->
+    <div class="slide" id="slide-25">
+      <div class="difficulty">Average Difficulty</div>
+      <p class="answer">Strongholds, Source Water Areas, and Wild Fish, Working Landscapes</p>
+      <p class="note">Strategic priorities that guide CalTrout's conservation efforts</p>
+    </div>
+
+    <!-- Slide 26: Question -->
+    <div class="slide" id="slide-26">
+      <div class="difficulty">10-Year-Old Difficulty</div>
+      <p class="question">True or False: Healthy fish mean healthy waters.</p>
+    </div>
+
+    <!-- Slide 27: Answer -->
+    <div class="slide" id="slide-27">
+      <div class="difficulty">10-Year-Old Difficulty</div>
+      <p class="answer">TRUE</p>
+      <p class="note">The health of fish populations directly reflects the health of our waterways</p>
+    </div>
+
+    <!-- Slide 28: Thank You -->
+    <div class="slide" id="slide-28">
+      <h1>Thank you for participating!</h1>
+      <h2>Enjoy the Fish Water People Film Festival</h2>
+      <p class="note" style="font-size: 1.5rem;">Learn more at caltrout.org</p>
+    </div>
+
+    <div class="navigation">
+      <button class="nav-btn" id="prev-btn">Previous</button>
+      <button class="nav-btn" id="next-btn">Next</button>
+    </div>
+    <div class="progress" id="progress">Slide 1 of 28</div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.slide');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const progress = document.getElementById('progress');
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[index].classList.add('active');
+        progress.textContent = `Slide ${index + 1} of ${slides.length}`;
+        
+        // Update navigation button states
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === slides.length - 1;
+      }
+
+      prevBtn.addEventListener('click', function() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+        }
+      });
+
+      nextBtn.addEventListener('click', function() {
+        if (currentSlide < slides.length - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+        }
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          if (currentSlide < slides.length - 1) {
+            currentSlide++;
+            showSlide(currentSlide);
+          }
+        } else if (e.key === 'ArrowLeft') {
+          if (currentSlide > 0) {
+            currentSlide--;
+            showSlide(currentSlide);
+          }
+        }
+      });
+
+      // Initialize first slide
+      showSlide(currentSlide);
+    });
+  </script>
+</body>
+</html>
